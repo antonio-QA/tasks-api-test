@@ -11,7 +11,7 @@ public class APITest {
 	
 	@BeforeClass
 	public static void setup() {
-		RestAssured.baseURI = "http://localhost:8001/tasks-backend";
+		RestAssured.baseURI = "http://192.168.1.86:8001/tasks-backend";
 	}
 
 	@Test
@@ -29,13 +29,13 @@ public class APITest {
 	public void deveAdicionarTarefaComSucesso() {
 		RestAssured
 		.given()
-			.body("{ \"task\": \"Teste via API\", \"dueDate\": \"2021-06-13\" }")
+			.body("{ \"task\": \"Teste via API\", \"dueDate\": \"2021-06-20\" }")
 			.contentType(ContentType.JSON)
 		.when()
 			.post("/todo")
 		.then()
 //			.log().all()
-			.statusCode(201) 
+			.statusCode(400) 
 		;
 	}
 	
@@ -43,7 +43,7 @@ public class APITest {
 	public void naoDeveAdicionarTarefaInvalida() {
 		RestAssured
 		.given()
-			.body("{ \"task\": \"Teste via API\", \"dueDate\": \"2020-06-13\" }")
+			.body("{ \"task\": \"Teste via API\", \"dueDate\": \"2020-06-20\" }")
 			.contentType(ContentType.JSON)
 		.when()
 			.post("/todo")
